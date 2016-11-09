@@ -1,0 +1,87 @@
+body {
+    background: #7474BF;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #7474BF, #348AC7);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #7474BF, #348AC7);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    font-family: 'Lato', sans-serif;
+}
+
+.container {
+    margin: 0;
+}
+
+.header-image {
+    width: 35%;
+}
+
+.center {
+    text-align: center;
+    display: block;
+}
+
+.main {
+    margin: 30px;
+}
+
+.name {
+    margin: 10px;
+    color: white;
+    text-shadow: 4px;
+    font-size: 1.75em;
+    font-weight: 300;
+    font-style: italic;
+}
+
+.hr-light {
+    color: white;
+}
+
+.content {
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.section-title {
+    color: white;
+    text-align: center;
+    font-weight: 700;
+}
+
+.option-panel {
+    width: 85%;
+    margin: 25px auto auto auto;
+}
+
+/*
+.play-option-title {
+    padding-top: 20px;
+    color: white;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.play-option-subtitle {
+    padding-top: 5px;
+    color: white;
+    font-size: 1em;
+    font-style: italic;
+}
+*/
+
+.phone-input {
+    width: 50%;
+    display: inline;
+}
+
+.delay-input {
+    width: 35%;
+    display: inline;
+    margin-left: 25px;
+}
+
+.callme-button {
+    margin-top: 20px;
+}
