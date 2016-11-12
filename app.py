@@ -6,13 +6,20 @@ from twilio.rest import TwilioRestClient
 from twilio import TwilioRestException
 from flask import Flask, request
 from flask import render_template
+from flask import g
 from config import *
 import hmac
 import hashlib
 import time
+import sqlite3
+import json
+import requests
 
 
 app = Flask(__name__)
+
+DATABASE = "database.db"
+
 
 def request_check():
     print("todo")
@@ -28,35 +35,45 @@ def welcome():
     resp = twilio.twiml.Response()
     
     with resp.gather(finishOnKey="#", action="/handle-number", method="POST") as g:
-        message = "Welcome to PhoneBuzz! Please enter any sequence of numbers, followed by the pound sign."
+        message = "Welcome to PhoneBuzz! Please enter any number, followed by the pound sign, to play!"
         g.say(message, voice="woman")
 
     return str(resp)
 
-@app.route("/outbound", methods=['GET', 'POST'])
+@app.route("/outbound", methods=['POST'])
 def outbound():
-    delaySeconds = 10
-    toNum = "+13012813692"
+    data = request.data
+    
+    numEqualsIndex = data.index("=")
+    ampIndex = data.index("&")
+    num = data[numEqualsIndex+1:ampIndex]
+    num = int(num)
+    
+    data = data[ampIndex+1:]
+    delayEqualsIndex = data.index("=")
+    delay = data[delayEqualsIndex+1:]
+    delay = int(delay)
+    
     fromNum = TWILIO_CALLER_ID
     account_sid = TWILIO_ACCOUNT_SID
     auth_token  = TWILIO_AUTH_TOKEN
     client = TwilioRestClient(account_sid, auth_token)
     url = "https://lendup-challenge-phonebuzz-rachitag22.c9users.io/welcome"
     
-    time.sleep(delaySeconds)
-    call = client.calls.create(url=url, to=toNum, from_=fromNum)
+    time.sleep(delay)
+    call = client.calls.create(url=url, to=num, from_=fromNum)
+    return ("Call outbound!")
     
 @app.route("/handle-number", methods=['GET', 'POST'])
 def handle_number():
     
     number_string = request.values.get('Digits', None)
+    number = int(number_string)
     resp = twilio.twiml.Response()
     message = "..."
     
-    for ch in number_string:
-    	message += " "
-    	num = int(ch)
-    	
+    for num in xrange(1,number):
+        message += ""
     	if num % 3 == 0 and num % 5 == 0:
     		message += "Fizz Buzz"
     	elif num % 3 == 0:
