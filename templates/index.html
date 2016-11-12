@@ -1,62 +1,115 @@
 <html>
 
-<title>PhoneBuzz</title>
+	<title>PhoneBuzz</title>
 
-<head>
-    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" integrity="sha384-+ENW/yibaokMnme+vBLnHMphUYxHs34h9lpdbSLuAwGkOKFRl4C34WkjazBtb7eT" crossorigin="anonymous" />
-    <link href="{{ url_for('static', filename='stylesheets/styles.css') }}" rel="stylesheet" type="text/css" />
-    <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet" />
-    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
-</head>
+	<head>
+		<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" integrity="sha384-+ENW/yibaokMnme+vBLnHMphUYxHs34h9lpdbSLuAwGkOKFRl4C34WkjazBtb7eT" crossorigin="anonymous" />
+		<link href="{{ url_for('static', filename='stylesheets/styles.css') }}" rel="stylesheet" type="text/css" />
+		<link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet" />
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+		<script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+	</head>
 
-<body>
-    <div class="container main">
-        <span class="center">
-            <img src="{{ url_for('static', filename='img/phonebuzz-logo.png') }}" class="header-image" />
-            <div class="name">by Rachit Agarwal</div>
-            <hr class="hr-gradient" />
+	<body>
+		<div class="container main">
+			<span class="center">
+				<img src="{{ url_for('static', filename='img/phonebuzz-logo.png') }}" class="header-image" />
+				<div class="name">by Rachit Agarwal</div>
+				<hr class="hr-gradient" />
 
-            <span class="content">
-                <span class="col-md-6">
-                    <h3 class="section-title">Play</h3>
-                    <div class="panel panel-primary option-panel">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Option 1: Call PhoneBuzz</h3>
-                        </div>
-                        <div class="panel-body">
-                            <a href="tel:3012311851" class="btn btn-info">Call <strong>301-231-1851</strong></a>
-                        </div>
-                    </div>
-                    <div class="panel panel-primary option-panel">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Option 2: Let PhoneBuzz Call You</h3>
-                        </div>
-                        <div class="panel-body">
-                            <form action="handle_option2" method="post">
-                                <div class="form-group">
-                                    <label class="control-label" for="numberInput">Phone Number</label>
-                                    <br />
-                                    <input type="number" class="form-control phone-input" id="numberInput" placeholder="1234567890">
-                                    <br />
-                                        <label class="control-label" for="delayInput">Delay (Optional)</label>
-                                    <div class="input-group">
-                                        <input type="number" min="0" max="3600" class="form-control input-delay" id="delayInput" placeholder="0" aria-describedby="seconds-text">
-                                        <span class="input-group-addon" id="seconds-text">seconds</span>
-                                    </div>
-                                <br />
-                                <button type="submit" class="btn btn-info callme-button">Call me!</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </span>
+				<span class="content">
+					<span class="col-md-6">
+						<h3 class="section-title">Play</h3>
+						<div class="panel panel-primary option-panel">
+							<div class="panel-heading">
+								<h3 class="panel-title">Option 1: Call PhoneBuzz</h3>
+							</div>
+							<div class="panel-body">
+								<a href="tel:3012311851" class="btn btn-info">Call <strong>301-231-1851</strong></a>
+							</div>
+						</div>
+						<div class="panel panel-primary option-panel">
+							<div class="panel-heading">
+								<h3 class="panel-title">Option 2: Let PhoneBuzz Call You</h3>
+							</div>
+							<div class="panel-body">
+								<form id="outbound-form" name="outbound-form">
+									<div id="success-alert" class="alert alert-success">
+									  <strong>Awesome!</strong> Expect a call soon! Enjoy playing PhoneBuzz :-)
+									</div>
+									<div id="error-alert" class="alert alert-danger">
+									  <strong>Oops!</strong> You'll need to enter a phone number to play PhoneBuzz ;-)
+									</div>
+									<div id="warning-alert" class="alert alert-warning">
+									  <strong>Oops!</strong> Please enter a valid phone number!
+									</div>
+									<div class="form-group">
+										<label class="control-label" for="numberInput">
+											Phone Number
+											<span class="label label-danger">Required</span>
+										</label>
+										<br />
+									<div class="input-group">
+										<span class="input-group-addon" id="country-code-text">+1</span>
+										<input type="tel" name="number-input" class="form-control phone-input" id="numberInput" placeholder="1234567890" aria-describedby="country-code-text" />
+									</div>
+									<br />
+									<label class="control-label" for="delayInput">Delay <span class="label label-default">Optional</span></label>
+									<div class="input-group">
+										<input type="number" min="0" max="3600" name="delay-input" class="form-control input-delay" id="delayInput" placeholder="0" aria-describedby="seconds-text">
+										<span class="input-group-addon" id="seconds-text">seconds</span>
+									</div>
+									<br />
+									<button type="button" class="btn btn-info callme-button" onclick="handleForm()">Call me!</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</span>
 
-                <span class="col-md-6">
-                    <h3 class="section-title">History</h3>
-                </span>
-           </span>
-        </span>
-    </div>
-</body>
+				<span class="col-md-6">
+					<h3 class="section-title">History</h3>
+					<div class="panel panel-primary history-panel">
+						<div class="panel-heading">
+							<h3 class="panel-title">Call History</h3>
+						</div>
+						<div class="panel-body">
+						   <table class="table table-striped table-hover ">
+							  <thead>
+								<tr class="info">
+								  <th>#</th>
+								  <th>Day</th>
+								  <th>Time</th>
+								  <th>Delay</th>
+								  <th>Phone #</th>
+								  <th>Replay</th>
+								</tr>
+							  </thead>
+							  <tbody>
+									<tr>
+										<td>1</td>
+										<td>11/11/2016</td>
+										<td>5:24 PM</td>
+										<td>5 seconds</td>
+										<td>3012813692</td>
+										<td><button type="button" class="btn btn-success btn-sm">Replay</button></td>
+									</tr>
+									<tr>
+										<td>2</td>
+										<td>10/25/2016</td>
+										<td>9:51 AM</td>
+										<td>None</td>
+										<td>3012813692</td>
+										<td><button type="button" class="btn btn-success btn-sm">Replay</button></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</span>
+			</span>
+		</div>
+	</body>
 
 </html>
