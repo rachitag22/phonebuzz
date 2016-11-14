@@ -18,15 +18,29 @@ import requests
 
 app = Flask(__name__)
 
-DATABASE = "database.db"
-
-
+def setup_database():
+    global DATABASE
+    global conn
+    global cursor
+    DATABASE = "database.db"
+    conn = sqlite3.connect(DATABASE)
+    cursor = conn.cursor()
+    table_exists = cursor.execute("SELECT name FROM sqlite_master WHERE name ='calls' and type='table'").fetchone()
+    
+    if not table_exists:
+        conn.execute('CREATE TABLE calls (id INTEGER PRIMARY KEY, datetime DATETIME , delay INT, phonenum INT)')
+    else:
+        print("YES")
+    cursor.close()
+    
+    
 def request_check():
     print("todo")
 
+setup_database()
+
 @app.route("/", methods=['GET', 'POST'])
 def main():
-    #outbound()
     return render_template("index.html")
 
 @app.route("/welcome", methods=['GET', 'POST'])
@@ -53,6 +67,14 @@ def outbound():
     delayEqualsIndex = data.index("=")
     delay = data[delayEqualsIndex+1:]
     delay = int(delay)
+    
+    cursor = conn.cursor()
+    insert = "INSERT INTO calls (id, datetime, delay, phonenum) VALUES "
+    insert = insert + "(NULL," + "CURRENT_TIMESTAMP," + str(delay) + "," + str(num) + ")"
+    print(insert)
+    cursor.execute(insert)
+    conn.commit()
+    cursor.close()
     
     fromNum = TWILIO_CALLER_ID
     account_sid = TWILIO_ACCOUNT_SID

@@ -29,8 +29,6 @@ function successForm(phoneNum, delay) {
     var http = new XMLHttpRequest();
     var url = "https://lendup-challenge-phonebuzz-rachitag22.c9users.io/outbound";
     var params = "num=" + phoneNum + "&delay=" + delay;
-    console.log(params);
-    
     http.open("POST", url, true);
     http.send(params);
 }
