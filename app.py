@@ -19,7 +19,6 @@ import requests
 
 app = Flask(__name__)
 global url_base
-url_base = "https://lendup-challenge-phonebuzz-rachitag22.c9users.io"
 url_base = "https://rach-phonebuzz.herokuapp.com"
 
 def setup_database():

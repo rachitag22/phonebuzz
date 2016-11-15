@@ -27,8 +27,8 @@ function successForm(phoneNum, delay) {
     $("#warning-alert").hide();
     $("#error-alert").hide();
     var http = new XMLHttpRequest();
-    var url = "https://lendup-challenge-phonebuzz-rachitag22.c9users.io/outbound";
-    url = "https://rach-phonebuzz.herokuapp.com/outbound";
+    var base_url = "https://rach-phonebuzz.herokuapp.com";
+    var url = base_url + "/outbound";
     var params = "num=" + phoneNum + "&delay=" + delay;
     http.open("POST", url, true);
     http.send(params);
