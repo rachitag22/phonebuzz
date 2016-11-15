@@ -79,30 +79,28 @@
 							  <thead>
 								<tr class="info">
 								  <th>#</th>
-								  <th>Day</th>
-								  <th>Time</th>
+								  <th>Date/Time (UTC)</th>
+								  <th>Number</th>
 								  <th>Delay</th>
 								  <th>Phone #</th>
 								  <th>Replay</th>
 								</tr>
 							  </thead>
 							  <tbody>
-									<tr>
-										<td>1</td>
-										<td>11/11/2016</td>
-										<td>5:24 PM</td>
-										<td>5 seconds</td>
-										<td>3012813692</td>
-										<td><button type="button" class="btn btn-success btn-sm">Replay</button></td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>10/25/2016</td>
-										<td>9:51 AM</td>
-										<td>None</td>
-										<td>3012813692</td>
-										<td><button type="button" class="btn btn-success btn-sm">Replay</button></td>
-									</tr>
+									{% for call in calls %}
+								    <tr>
+								        <td>{% print(call[0]) %}</td>
+								        <td>{% print(call[1]) %}</td>
+								        <td>{% print(call[4]) %}</td>
+								        <td>{% print(call[2]) %}&nbsp;seconds</td>
+								        <td>{% print(call[3]) %}</td>
+										<td>
+											<form action="/preset/{{call[0]}}">
+												<button type="submit" class="btn btn-success btn-sm">Replay</button>
+											</form>
+										</td>
+								    </tr>
+									{% endfor %}
 								</tbody>
 							</table>
 						</div>
