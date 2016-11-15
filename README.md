@@ -47,5 +47,7 @@ In scripts.js, change this line:
 var base_url = "https://rach-phonebuzz.herokuapp.com";
 ```
 
+Also, after you make a new Twilio app, make sure the voice URL points to the URL for your clone!
+
 ## Thank You!
 Hopefully, everything goes well. Feel free to email me at (rachitagarwal0202@gmail.com).
