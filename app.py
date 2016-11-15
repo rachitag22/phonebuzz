@@ -160,7 +160,7 @@ def preset(id):
     auth_token  = TWILIO_AUTH_TOKEN
     client = TwilioRestClient(account_sid, auth_token)
     url = url_base + "/preset-number?num=" + str(num)
-    
+
     time.sleep(delay)
     call = client.calls.create(url=url, to=phoneNum, from_=fromNum)
     
@@ -171,16 +171,11 @@ def preset_number():
     number = request.args.get("num")
     number = int(number)
     
-    resp = twilio.twiml.Response()
+    resp = twiml.Response()
     message = "Welcome to PhoneBuzz Replay! The number is " + str(number) + "..."
-    resp.say(message, voice="woman")
-    
-    message = ""
-    
+
     for num in xrange(1,number):
-        message += ""
-        
-    	if num % 3 == 0 and num % 5 == 0:
+      	if num % 3 == 0 and num % 5 == 0:
     		message += "Fizz Buzz"
     	elif num % 3 == 0:
     		message += "Fizz"
@@ -191,10 +186,9 @@ def preset_number():
 	
     	message += "..."
 	
-    message += "......Thank you for using PhoneBuzz!"
+    message += "......Thank you for using PhoneBuzz!"   
     
     resp.say(message, voice="woman")
-    
-    return redirect("/")
+    return str(resp)
     
 app.run(host=os.getenv('IP', '0.0.0.0'), port=int(os.getenv('PORT', 8080)), use_reloader=False)
