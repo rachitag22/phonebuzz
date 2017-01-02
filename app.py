@@ -59,6 +59,8 @@ def welcome():
 
 @app.route("/outbound", methods=['GET', 'POST'])
 def outbound():
+    return ("No call, calling disabled!")
+    
     data = request.data
     
     numEqualsIndex = data.index("=")
