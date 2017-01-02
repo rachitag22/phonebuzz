@@ -9,6 +9,10 @@ body {
     font-family: 'Lato', sans-serif;
 }
 
+a .dark {
+    color: #34495e;   
+}
+
 .container {
     margin: 0;
 }
@@ -66,8 +70,4 @@ body {
 
 .delay-input {
     width: 50%;
-}
-
-.alert-warning > a {
-    color: #34495e;   
 }
