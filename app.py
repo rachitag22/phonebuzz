@@ -61,6 +61,7 @@ def welcome():
 def outbound():
     return ("No call, calling disabled!")
     
+    '''
     data = request.data
     
     numEqualsIndex = data.index("=")
@@ -98,6 +99,7 @@ def outbound():
     time.sleep(delay)
     call = client.calls.create(url=url, to=phoneNum, from_=fromNum)
     return ("Call outbound!")
+    '''
     
 @app.route("/handle-number", methods=['GET', 'POST'])
 def handle_number():
