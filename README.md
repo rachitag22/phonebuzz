@@ -8,7 +8,7 @@ PhoneBuzz was built with Flask, HTML/CSS/JS, and Twilio.
 
 ## Try It Out
 
-You can try out the app at (https://rach-phonebuzz.herokuapp.com/). NOTE: You will only be able to use Option 1 (Call the PhoneBuzz hotline). Option 2 won't work because my Twilio account doesn't have your phone number as a verified number.
+You can try out the app at !(https://rach-phonebuzz.herokuapp.com/). NOTE: You will only be able to use Option 1 (Call the PhoneBuzz hotline). Option 2 won't work because my Twilio account doesn't have your phone number as a verified number.
 
 ## Getting Started
 
